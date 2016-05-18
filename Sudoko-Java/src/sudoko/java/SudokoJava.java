@@ -25,14 +25,15 @@ public class SudokoJava {
     static final int lastBox = 3;  //Index of last cell in the grid in a row.
     static final int minNumber = 1;//Min number to fill the empty cell.
     static final int maxNumber = 4;//Max number to fill the empty cell.
-    static final int noPredefinedBoxes = 5;//Number of predefined values in sudoko.
+    static final int minNoPredefinedBoxes = 4;//Number of predefined values in sudoko.
+    static final int maxNoPredefinedBoxes = 7;
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
         
-        //sudokoGenerator(); //For generating the grid.
+        sudokoGenerator(); //For generating the grid.
  
         for(int i =0; i<4;i++){
             for(int j=0;j<4;j++){
@@ -46,7 +47,10 @@ public class SudokoJava {
         // Method for generating sudoku puzzels.
         
         int predefinedRow = 0, predefinedCol = 0, predefinedNum = 0;
+        int noPredefinedBoxes;
         Random random = new Random();
+        noPredefinedBoxes = random.nextInt(maxNoPredefinedBoxes - 
+                                minNoPredefinedBoxes + 1) + minNoPredefinedBoxes;
         for(int i=1; i<=noPredefinedBoxes; i++ ){
             predefinedRow = random.nextInt(lastBox - firstBox + 1);
             predefinedCol = random.nextInt(lastBox - firstBox + 1);
