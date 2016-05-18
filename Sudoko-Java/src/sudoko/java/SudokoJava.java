@@ -19,7 +19,7 @@ public class SudokoJava {
                                  {0,0,0,0},
                                  {0,0,0,0}}; //Empty grid, where predefined 
                                              //values can be set.
-    static int grid[][] = new int[4][4]; //Grid to be manipulated.
+    static int grid[][] = new int[4][4]; //Grid to be manipulated by solver agent.
     
     static final int firstBox = 0; //Index of first cell in the grid in a row.
     static final int lastBox = 3;  //Index of last cell in the grid in a row.
@@ -39,7 +39,7 @@ public class SudokoJava {
                 grid[i][j] = sudokuGrid[i][j];
             }
         }
-        displayGrid((sudokoSolverAgent(0, 0, grid)));
+        displayGrid((sudokoSolverAgent(0, 0, grid))); //For solving the grid.
     }
     
     public static void sudokoGenerator(){
