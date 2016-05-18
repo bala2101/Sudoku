@@ -5,6 +5,8 @@
  */
 package sudoko.java;
 
+import java.util.Random;
+
 /**
  *
  * @author jaswanth
@@ -31,6 +33,27 @@ public class SudokoJava {
         // TODO code application logic here
         
         
+    }
+    
+    public static void sudokuGenerator(){
+        // Method for generating sudoku puzzels.
+        
+        int predefinedRow = 0, predefinedCol = 0, predefinedNum = 0;
+        Random random = new Random();
+        for(int i=1; i<=noPredefinedBoxes; i++ ){
+            predefinedRow = random.nextInt(lastBox - firstBox + 1);
+            predefinedCol = random.nextInt(lastBox - firstBox + 1);
+            predefinedNum = random.nextInt(maxNumber - minNumber + 1) 
+                            + minNumber;
+            if(sudokuGrid[predefinedRow][predefinedCol] == 0){
+                sudokuGrid[predefinedRow][predefinedCol] = predefinedNum;
+                if(validMove(predefinedRow,predefinedCol,sudokuGrid)){
+                    continue;
+                }else{sudokuGrid[predefinedRow][predefinedCol] = 0;i--;}
+            } else {i--;}
+        }
+        
+        displayGrid(sudokuGrid);
     }
     
     public static int[][] sudokoSolverAgent(int x, int y, int[][] grid){
