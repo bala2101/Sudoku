@@ -33,6 +33,40 @@ public class SudokoJava {
         
     }
     
+    public static int[][] sudokoSolverAgent(int x, int y, int[][] grid){
+        // Agent that solves the entire sudoko.
+        
+        int validX = 3, validY = 3, flag = 0;
+        for(int i=3; i>=0; i--){
+            for(int j=3; j>=0; j--){
+                if(sudokuGrid[i][j] == 0){
+                    validX = i; validY = j; flag = 1;
+                    break;
+                }
+            }
+            if(flag ==1){break;}
+        }
+        while((!validMove(validX,validY,grid) || grid[validX][validY] == 0)){
+            if(sudokuGrid[x][y]!=0){
+                int newX,newY;
+                if(y==3){newX = x+1;newY=0;}else{newX=x; newY=y+1;}
+                sudokoSolverAgent(newX,newY,grid);
+            }else{
+                if(grid[x][y] < 4) {
+                    grid[x][y]++;
+                    if(validMove(x,y,grid)){
+                        int newX,newY;
+                        if(y==3){newX = x+1;newY=0;}else{newX=x; newY=y+1;}
+                        sudokoSolverAgent(newX,newY,grid);
+                    }
+                } else {
+                    grid[x][y]=0; break;
+                }
+            }
+        }
+        return grid;
+    }
+    
     public static boolean validMove(int x, int y, int[][] grid) {
         // Method to check for valid moves.
         
