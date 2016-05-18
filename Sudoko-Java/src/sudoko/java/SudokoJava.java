@@ -32,7 +32,8 @@ public class SudokoJava {
     public static void main(String[] args) {
         // TODO code application logic here
         
-        sudokoGenerator();
+        //sudokoGenerator(); //For generating the grid.
+ 
         for(int i =0; i<4;i++){
             for(int j=0;j<4;j++){
                 grid[i][j] = sudokuGrid[i][j];
@@ -82,13 +83,15 @@ public class SudokoJava {
                 sudokoSolverAgent(newX,newY,grid);
             }else{
                 if(grid[x][y] < 4) {
-                    grid[x][y]++;
+                    grid[x][y]++; //Incrementing the value in each cell by one.
                     if(validMove(x,y,grid)){
                         int newX,newY;
                         if(y==3){newX = x+1;newY=0;}else{newX=x; newY=y+1;}
                         sudokoSolverAgent(newX,newY,grid);
                     }
                 } else {
+                    //If the incremented value is not valid, then set the value
+                    //to zero and move back to the previous cell.
                     grid[x][y]=0; break;
                 }
             }
@@ -119,6 +122,7 @@ public class SudokoJava {
     public static void displayGrid(int[][] grid) { 
         // Method for displaying the grid.
         
+        System.out.println();
         for(int i =0; i<4;i++){
             for(int j=0;j<4;j++){
                 System.out.print(grid[i][j] + "  ");
