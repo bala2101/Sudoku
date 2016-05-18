@@ -32,10 +32,16 @@ public class SudokoJava {
     public static void main(String[] args) {
         // TODO code application logic here
         
-        
+        sudokoGenerator();
+        for(int i =0; i<4;i++){
+            for(int j=0;j<4;j++){
+                grid[i][j] = sudokuGrid[i][j];
+            }
+        }
+        displayGrid((sudokoSolverAgent(0, 0, grid)));
     }
     
-    public static void sudokuGenerator(){
+    public static void sudokoGenerator(){
         // Method for generating sudoku puzzels.
         
         int predefinedRow = 0, predefinedCol = 0, predefinedNum = 0;
