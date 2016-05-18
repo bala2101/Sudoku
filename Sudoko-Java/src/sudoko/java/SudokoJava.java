@@ -33,9 +33,29 @@ public class SudokoJava {
         
     }
     
+    public static boolean validMove(int x, int y, int[][] grid) {
+        // Method to check for valid moves.
+        
+        String cellValues = "";
+        for(int i=0;i<4;i++){
+            cellValues += Integer.toString(grid[i][y]); //Check vertical values.
+            cellValues += Integer.toString(grid[x][i]); //Check horizontal values.
+            cellValues += Integer.toString(grid[(x/2)*2+i/2][(y/2)*2+i%2]); 
+                                                    //Check values in the subgrid.
+        }
+        int count=0, flag=0;
+        while ((flag=cellValues.indexOf(Integer.toString(grid[x][y]), flag))!=-1){
+            //Counting the number of occurences of the respective grid value.
+            flag++;
+            count++;
+        }
+        
+        return (count == 3);
+    }
+    
     public static void displayGrid(int[][] grid) { 
         // Method for displaying the grid.
-        System.out.println();
+        
         for(int i =0; i<4;i++){
             for(int j=0;j<4;j++){
                 System.out.print(grid[i][j] + "  ");
