@@ -94,30 +94,11 @@ public class SudokoJava {
         }
         
         while((!validMove(validX,validY,grid) || grid[validX][validY] == 0)){
-            if(sudokuGrid[x][y]!=0){
-                int newX,newY;
-                if(y == lastBox){
-                    newX = x+1;
-                    newY = 0;
-                } else { 
-                    newX = x; 
-                    newY = y+1;
-                }
-                sudokoSolverAgent(newX,newY,grid);
-            } else {
+            if(sudokuGrid[x][y]!=0) nextBox(x, y, grid);
+            else {
                 if(grid[x][y] < maxNumber) {
                     grid[x][y]++; //Incrementing the value in each cell by one.
-                    if(validMove(x,y,grid)){
-                        int newX,newY;
-                        if(y == lastBox){
-                            newX = x+1;
-                            newY = 0;
-                        } else {
-                            newX = x; 
-                            newY = y+1;
-                        }
-                        sudokoSolverAgent(newX,newY,grid);
-                    }
+                    if(validMove(x, y, grid)) nextBox(x, y, grid);
                 } else {
                     //If the incremented value is not valid, then set the value
                     //to zero and move back to the previous cell.
@@ -126,6 +107,18 @@ public class SudokoJava {
             }
         }
         return grid;
+    }
+    
+    public static void nextBox(int x, int y, int[][] grid) {
+        int newX,newY;
+        if(y == lastBox){
+            newX = x+1;
+            newY = 0;
+        } else {
+            newX = x; 
+            newY = y+1;
+        }
+        sudokoSolverAgent(newX,newY,grid);
     }
     
     public static boolean validMove(int x, int y, int[][] grid) {
